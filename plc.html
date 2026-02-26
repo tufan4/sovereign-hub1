@@ -1599,7 +1599,7 @@
       <span class="header-breadcrumb" id="breadcrumb">/ Genel Bakış</span>
     </div>
     <div class="header-actions">
-      <button onclick="window.parent.changePageFromIframe('home.html')"
+      <button onclick="window.location.href='index.html'"
         style="background:none; border:1px solid var(--border-accent); color:var(--accent-blue); padding:6px 12px; border-radius:5px; cursor:pointer; font-size:12px; font-weight:700; margin-right:10px; display:inline-flex; align-items:center; gap:5px; transition:0.3s;"
         onmouseover="this.style.background='var(--accent-blue)'; this.style.color='#000';"
         onmouseout="this.style.background='none'; this.style.color='var(--accent-blue)';">
@@ -4178,7 +4178,8 @@
       });
       document.getElementById('breadcrumb').textContent = '/ ' + (sectionTitles[id] || id);
       window.scrollTo(0, 0);
-      // Close sidebar on mobile
+      
+      // Mobil cihazlarda bir bölüme tıklandığında sidebar'ı otomatik kapat
       if (window.innerWidth < 900) {
         document.getElementById('sidebar').classList.remove('open');
       }
