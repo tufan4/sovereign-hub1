@@ -11,15 +11,14 @@
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --bg-camo: #1b2118;
-            --panel: #0d120a;
-            --border: #2f3824;
+            --bg-camo: #050505;
+            --panel: #0a0a0c;
+            --border: #1a1a20;
             --accent: #d4af37;
             /* Gold/Yellow */
             --accent-hover: #f3c22b;
-            --text: #e0e8d8;
-            --dim: #7f8c72;
-            --sidebar-w: 260px;
+            --text: #e8e8e8;
+            --dim: #9ca3af;
         }
 
         * {
@@ -38,7 +37,7 @@
             overflow: hidden;
         }
 
-        /* Camo pattern pseudo-element */
+        /* Space background pseudo-element */
         body::before {
             content: '';
             position: absolute;
@@ -46,119 +45,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: #1b2118;
+            background-color: var(--bg-camo);
             background-image:
-                radial-gradient(circle at 15% 50%, rgba(13, 18, 10, 0.4) 20%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(47, 56, 36, 0.2) 20%, transparent 25%),
-                radial-gradient(circle at 50% 80%, rgba(13, 18, 10, 0.2) 15%, transparent 35%);
-            background-size: 400px 400px;
+                radial-gradient(circle at 15% 50%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 85% 30%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
             pointer-events: none;
             z-index: -1;
-        }
-
-        /* --- SIDEBAR --- */
-        aside {
-            width: var(--sidebar-w);
-            background: var(--panel);
-            border-right: 2px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            padding: 30px 15px 0 15px;
-            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.5);
-            z-index: 10;
-        }
-
-        .logo {
-            font-family: 'Black Ops One', cursive;
-            font-weight: 400;
-            font-size: 1.8rem;
-            letter-spacing: 3px;
-            margin-bottom: 5px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            text-shadow: 2px 2px 0px #000;
-        }
-
-        .logo-sub {
-            font-family: 'Host Grotesk';
-            font-size: 0.65rem;
-            color: var(--accent);
-            text-align: center;
-            letter-spacing: 2px;
-            margin-bottom: 30px;
-            font-weight: 700;
-        }
-
-        .nav-label {
-            font-family: 'Black Ops One', cursive;
-            font-size: 0.8rem;
-            color: var(--dim);
-            letter-spacing: 2px;
-            margin: 20px 0 10px 10px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 5px;
-        }
-
-        .menu-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 15px;
-            color: #b0bd9f;
-            text-decoration: none;
-            border-radius: 4px;
-            margin-bottom: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            font-size: 0.9rem;
-            font-family: 'Black Ops One', cursive;
-            letter-spacing: 1px;
-            border-left: 3px solid transparent;
-        }
-
-        .menu-item:hover {
-            background: rgba(212, 175, 55, 0.1);
-            color: #fff;
-            border-left-color: rgba(212, 175, 55, 0.5);
-        }
-
-        .menu-item.active {
-            background: rgba(212, 175, 55, 0.15);
-            color: var(--accent);
-            border-left-color: var(--accent);
-            text-shadow: 1px 1px 2px #000;
-        }
-
-        .lucide {
-            stroke-width: 2.5;
-        }
-
-        /* --- FOOTER --- */
-        .sidebar-footer {
-            margin-top: auto;
-            padding: 25px 15px;
-            background: #080a07;
-            border-top: 2px solid var(--border);
-            margin-left: -15px;
-            margin-right: -15px;
-        }
-
-        .dev-info {
-            font-size: 0.75rem;
-            line-height: 1.4;
-            color: #7f8c72;
-            text-align: center;
-        }
-
-        .dev-info b {
-            display: block;
-            color: var(--text);
-            font-family: 'Black Ops One', cursive;
-            font-size: 0.85rem;
-            letter-spacing: 1px;
-            margin-bottom: 4px;
         }
 
         /* --- VIEWPORT --- */
@@ -169,6 +61,7 @@
             display: flex;
             flex-direction: column;
             z-index: 5;
+            width: 100%;
         }
 
         #loader {
@@ -208,86 +101,11 @@
             opacity: 1;
             pointer-events: auto;
         }
-
-        /* --- MOBILE --- */
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--panel);
-            border-top: 2px solid var(--border);
-            padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
-            justify-content: space-around;
-            z-index: 2000;
-        }
-
-        .mobile-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            color: #b0bd9f;
-            font-size: 0.6rem;
-            gap: 4px;
-            font-family: 'Black Ops One', cursive;
-        }
-
-        .mobile-item.active {
-            color: var(--accent);
-        }
-
-        @media (max-width: 850px) {
-            aside {
-                display: none;
-            }
-
-            .mobile-nav {
-                display: flex;
-            }
-
-            main {
-                height: calc(100vh - 75px);
-            }
-        }
     </style>
 </head>
 
 <body>
     <div id="loader"></div>
-
-    <aside>
-        <div class="logo">SOVEREIGN</div>
-        <div class="logo-sub">ASKERİ EĞİTİM PLATFORMU //</div>
-
-        <span class="nav-label">KARARGAH</span>
-        <div class="menu-item active" onclick="loadPage('home.html', this)">
-            <i data-lucide="crosshair" size="18"></i> ANASAYFA
-        </div>
-
-        <span class="nav-label">MÜHENDİSLİK TABURU</span>
-        <div class="menu-item" onclick="loadPage('plc.html', this)">
-            <i data-lucide="zap" size="18"></i> PLC SİSTEM
-        </div>
-        <div class="menu-item" onclick="loadPage('stm32.html', this)">
-            <i data-lucide="cpu" size="18"></i> STM32 CORE
-        </div>
-
-        <span class="nav-label">ARŞİV & İSTİHBARAT</span>
-        <div class="menu-item" onclick="loadPage('ohmletter2.html', this)">
-            <i data-lucide="book" size="18"></i> OHMLETTER
-        </div>
-        <div class="menu-item" onclick="loadPage('tufang.html', this)">
-            <i data-lucide="languages" size="18"></i> TUFANG
-        </div>
-
-        <div class="sidebar-footer">
-            <div class="dev-info">
-                <b>RIFAT EMRE TUFAN</b>
-                Oluşturulmuş ve Geliştirilmekte Olan Eğitim İçeriğidir
-            </div>
-        </div>
-    </aside>
 
     <main>
         <div class="iframe-wrapper">
@@ -295,39 +113,12 @@
         </div>
     </main>
 
-    <div class="mobile-nav">
-        <a class="mobile-item active" onclick="loadPage('home.html', this)">
-            <i data-lucide="crosshair" size="20"></i>MERKEZ
-        </a>
-        <a class="mobile-item" onclick="loadPage('plc.html', this)">
-            <i data-lucide="zap" size="20"></i>PLC
-        </a>
-        <a class="mobile-item" onclick="loadPage('stm32.html', this)">
-            <i data-lucide="cpu" size="20"></i>STM32
-        </a>
-        <a class="mobile-item" onclick="loadPage('ohmletter2.html', this)">
-            <i data-lucide="book" size="20"></i>OHM
-        </a>
-        <a class="mobile-item" onclick="loadPage('tufang.html', this)">
-            <i data-lucide="languages" size="20"></i>DİL
-        </a>
-    </div>
-
     <script>
         lucide.createIcons();
         const frame = document.getElementById('content-frame');
         const loader = document.getElementById('loader');
 
-        function loadPage(url, el) {
-            document.querySelectorAll('.menu-item, .mobile-item').forEach(item => item.classList.remove('active'));
-            if (el) {
-                // If clicked from mobile or sidebar, find all matching url elements to set active
-                document.querySelectorAll(`[onclick*="${url}"]`).forEach(match => match.classList.add('active'));
-            } else {
-                // If called from child iframe (home.html)
-                document.querySelectorAll(`[onclick*="${url}"]`).forEach(match => match.classList.add('active'));
-            }
-
+        function loadPage(url) {
             loader.style.transform = 'scaleX(0.5)';
             frame.style.opacity = '0';
             setTimeout(() => { frame.src = url; }, 50);
@@ -343,12 +134,12 @@
 
         window.onload = () => {
             // Başlangıçta anasayfayı yükle
-            loadPage('home.html', document.querySelector('.menu-item'));
+            loadPage('home.html');
         };
 
-        // Iframe içinden menüyü değiştirmek için global bir fonksiyon açıyoruz
+        // Iframe içinden sayfayı değiştirmek için global bir fonksiyon
         window.changePageFromIframe = function (url) {
-            loadPage(url, null);
+            loadPage(url);
         };
     </script>
 </body>

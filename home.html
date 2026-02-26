@@ -1,212 +1,348 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOVEREIGN - Anasayfa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Host+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;700&family=Outfit:wght@500;700;900&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --bg-camo: #1b2118;
-            --panel: #11160c;
-            --border: #2f3824;
-            --accent: #d4af37; 
-            --text: #e0e8d8;
-            --dim: #a1aa95;
+            --bg-camo: #050505;
+            --panel: #0a0a0c;
+            --border: #1a1a20;
+            --accent: #d4af37;
+            --accent-glow: rgba(212, 175, 55, 0.4);
+            --text: #e8e8e8;
+            --dim: #9ca3af;
+            --font-main: 'Host Grotesk', sans-serif;
+            --font-title: 'Outfit', sans-serif;
         }
 
         body {
             background-color: var(--bg-camo);
-            background-image: 
-                linear-gradient(rgba(27, 33, 24, 0.9), rgba(27, 33, 24, 0.9)),
-                repeating-linear-gradient(45deg, #161b13 0px, #161b13 2px, transparent 2px, transparent 4px);
             color: var(--text);
-            font-family: 'Host Grotesk', sans-serif;
-            margin: 0; padding: 40px;
+            font-family: var(--font-main);
+            margin: 0;
+            padding: 40px;
             overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        .container { max-width: 1000px; margin: 0 auto; }
+        .container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
 
         /* HERO SECTION */
-        .hero { 
-            text-align: center; 
-            margin-bottom: 60px; 
-            border-bottom: 2px solid var(--border); 
-            padding-bottom: 40px; 
+        .hero {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
             position: relative;
         }
-        .hero::after {
-            content: '';
-            position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%);
-            width: 100px; height: 2px; background: var(--accent);
+
+        .hero h1 {
+            font-family: var(--font-title);
+            font-size: 5rem;
+            font-weight: 900;
+            color: #fff;
+            margin: 0;
+            letter-spacing: -2px;
+            text-transform: uppercase;
+            text-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
         }
 
-        .hero h1 { 
-            font-family: 'Black Ops One', cursive; 
-            font-size: 5rem; 
-            color: #fff; 
-            margin: 0; 
-            letter-spacing: 6px; 
-            text-shadow: 4px 4px 0px #0a0c09; 
+        .hero h2 {
+            font-family: var(--font-title);
+            font-size: 1.2rem;
+            color: var(--accent);
+            margin: 0 0 20px 0;
+            letter-spacing: 6px;
+            font-weight: 700;
+            text-transform: uppercase;
         }
-        .hero h2 { 
-            font-family: 'Black Ops One', cursive; 
-            font-size: 1.5rem; 
-            color: var(--accent); 
-            margin: 10px 0 25px 0; 
-            letter-spacing: 5px;
-            font-weight: 400;
-        }
-        .hero p { 
-            font-family: 'Host Grotesk', sans-serif;
-            font-size: 1.1rem; 
-            color: var(--dim); 
+
+        .hero p {
+            font-size: 1.05rem;
+            color: var(--dim);
             max-width: 600px;
             margin: 0 auto;
             line-height: 1.6;
-            border-left: 3px solid var(--accent);
-            padding-left: 15px;
-            text-align: left;
-            background: rgba(0,0,0,0.3);
-            padding: 15px;
-            border-radius: 4px;
         }
 
-        .section-title { 
-            font-family: 'Black Ops One', cursive; 
-            font-size: 2.2rem; 
-            color: #fff; 
-            margin-bottom: 40px; 
+        .section-title {
+            font-family: var(--font-title);
+            font-size: 1.5rem;
+            color: #fff;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 15px;
+            font-weight: 700;
         }
+
         .section-title::before {
-            content: ''; width: 12px; height: 12px; background: var(--accent); display: inline-block;
+            content: '';
+            width: 20px;
+            height: 4px;
+            background: var(--accent);
+            display: inline-block;
+            border-radius: 2px;
         }
 
-        /* CARDS */
-        .cards { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
-            gap: 30px; 
+        /* EXPANDING ACCORDION (Modern UI) */
+        .accordion-wrapper {
+            display: flex;
+            width: 100%;
+            height: 50vh;
+            min-height: 400px;
+            gap: 15px;
+            margin-bottom: 40px;
         }
 
-        .card { 
-            background: var(--panel); 
-            border: 1px solid var(--border); 
-            border-radius: 8px; 
-            padding: 30px; 
+        .acc-panel {
+            position: relative;
+            flex: 1;
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: 16px;
             cursor: pointer;
-            position: relative; 
-            transition: all 0.3s ease;
+            overflow: hidden;
+            transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+        }
+
+        .acc-panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(10, 15, 13, 1) 0%, rgba(10, 15, 13, 0) 100%);
+            z-index: 1;
+            opacity: 0.8;
+            transition: opacity 0.5s;
+        }
+
+        .acc-panel:hover {
+            flex: 4;
+            border-color: var(--accent);
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.15);
+        }
+
+        .acc-panel:hover::before {
+            opacity: 0.95;
+        }
+
+        .acc-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.2;
+            transition: all 0.5s;
+            filter: grayscale(100%);
+        }
+
+        .acc-panel:hover .acc-bg {
+            opacity: 0.4;
+            filter: grayscale(0%) contrast(1.2);
+            transform: scale(1.05);
+        }
+
+        .acc-content {
+            position: relative;
+            z-index: 2;
             display: flex;
             flex-direction: column;
             gap: 15px;
-            overflow: hidden;
+            transform: translateY(60px);
+            transition: transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        .card::before {
-            content: '>>>';
-            position: absolute;
-            top: 20px; right: 20px;
-            font-family: 'Black Ops One', cursive;
-            color: var(--border);
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
+        .acc-panel:hover .acc-content {
+            transform: translateY(0);
         }
 
-        .card:hover {
-            border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-            background: rgba(17, 22, 12, 0.8);
-        }
-
-        .card:hover::before {
-            color: var(--accent);
-            right: 15px;
-        }
-
-        .card-header {
+        .acc-header {
             display: flex;
             align-items: center;
             gap: 15px;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 15px;
         }
 
-        .card-icon {
+        .acc-icon {
             color: var(--accent);
+            background: rgba(212, 175, 55, 0.1);
+            padding: 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            min-width: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
-        .card h3 { 
-            font-family: 'Black Ops One', cursive; 
-            color: #fff; 
-            font-size: 1.8rem; 
-            margin: 0; 
-            letter-spacing: 1px; 
-        }
-
-        .card p { 
-            color: var(--dim); 
-            line-height: 1.6; 
-            font-size: 1.05rem; 
+        .acc-title {
+            font-family: var(--font-title);
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: 900;
             margin: 0;
-            flex-grow: 1;
+            white-space: nowrap;
         }
 
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 3rem; }
-            .cards { grid-template-columns: 1fr; }
-            body { padding: 20px; }
+        .acc-text {
+            color: var(--dim);
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0;
+            transition: opacity 0.3s;
+            max-width: 500px;
+        }
+
+        .acc-panel:hover .acc-text {
+            opacity: 1;
+            transition-delay: 0.2s;
+        }
+
+        .btn-launch {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--accent);
+            color: #000;
+            font-family: var(--font-title);
+            font-weight: 700;
+            padding: 10px 20px;
+            border-radius: 8px;
+            width: fit-content;
+            margin-top: 10px;
+            text-decoration: none;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+        }
+
+        .acc-panel:hover .btn-launch {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.3s;
+        }
+
+        .btn-launch:hover {
+            background: #fff;
+            box-shadow: 0 0 15px var(--accent-glow);
+        }
+
+        @media (max-width: 900px) {
+            .accordion-wrapper {
+                flex-direction: column;
+                height: auto;
+            }
+
+            .acc-panel {
+                flex: none;
+                height: 120px;
+            }
+
+            .acc-panel:hover {
+                height: 300px;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="hero">
             <h1>SOVEREIGN</h1>
-            <h2>ASKERİ EĞİTİM PLATFORMU //</h2>
+            <h2>Askeri Eğitim Platformu //</h2>
             <p>Rifat Emre Tufan tarafından oluşturulmuş, geliştirilmekte olan eğitim içeriğidir.</p>
         </div>
-        
+
         <h2 class="section-title">NELER VAR?</h2>
-        
-        <div class="cards">
-            
-            <div class="card" onclick="window.parent.changePageFromIframe('plc.html')">
-                <div class="card-header">
-                    <i data-lucide="zap" class="card-icon" size="32"></i>
-                    <h3>PLC SYSTEM</h3>
+
+        <div class="accordion-wrapper">
+
+            <div class="acc-panel" onclick="window.parent.changePageFromIframe('plc.html')">
+                <div class="acc-bg"
+                    style="background-image: repeating-linear-gradient(45deg, #0a0a0c 0px, #0a0a0c 2px, transparent 2px, transparent 4px);">
                 </div>
-                <p>PLC öğrenmekte olan insanların temel bilgi seviyesine sahip olması için gereken şeyler vardır.</p>
+                <div class="acc-content">
+                    <div class="acc-header">
+                        <div class="acc-icon"><i data-lucide="zap" size="24"></i></div>
+                        <h3 class="acc-title">PLC</h3>
+                    </div>
+                    <p class="acc-text">PLC öğrenmekte olan insanların temel bilgi seviyesine sahip olması için gereken
+                        mimari kurallar, ladder diyagramları ve sistem rehberleri.</p>
+                    <div class="btn-launch">SİSTEMİ BAŞLAT <i data-lucide="arrow-right" size="16"></i></div>
+                </div>
             </div>
 
-            <div class="card" onclick="window.parent.changePageFromIframe('stm32.html')">
-                <div class="card-header">
-                    <i data-lucide="cpu" class="card-icon" size="32"></i>
-                    <h3>STM32 CORE</h3>
+            <div class="acc-panel" onclick="window.parent.changePageFromIframe('stm32.html')">
+                <div class="acc-bg"
+                    style="background-image: repeating-linear-gradient(-45deg, #0a0a0c 0px, #0a0a0c 2px, transparent 2px, transparent 4px);">
                 </div>
-                <p>Askeri alanda C programlama dilini kullanarak STM32 mikroişlemci modüllerini öğrenmek içindir.</p>
+                <div class="acc-content">
+                    <div class="acc-header">
+                        <div class="acc-icon"><i data-lucide="cpu" size="24"></i></div>
+                        <h3 class="acc-title">STM32</h3>
+                    </div>
+                    <p class="acc-text">Askeri alanda C programlama dilini kullanarak STM32 mikroişlemci modüllerini
+                        öğrenmek ve donanım seviyesinde kodlamak içindir.</p>
+                    <div class="btn-launch">SİSTEMİ BAŞLAT <i data-lucide="arrow-right" size="16"></i></div>
+                </div>
             </div>
 
-            <div class="card" onclick="window.parent.changePageFromIframe('ohmletter2.html')">
-                <div class="card-header">
-                    <i data-lucide="book" class="card-icon" size="32"></i>
-                    <h3>OHMLETTER</h3>
+            <div class="acc-panel" onclick="window.parent.changePageFromIframe('ohmletter2.html')">
+                <div class="acc-bg"
+                    style="background-image: radial-gradient(circle, #0a0a0c 2px, transparent 2.5px); background-size: 10px 10px;">
                 </div>
-                <p>Elektrik alanında neyin nereye bağlanacağını gösteren kısımdır.</p>
+                <div class="acc-content">
+                    <div class="acc-header">
+                        <div class="acc-icon"><i data-lucide="zap-off" size="24"></i></div>
+                        <h3 class="acc-title">OHMLETTER</h3>
+                    </div>
+                    <p class="acc-text">Elektrik alanında devasa bilgi kütüphanesi. Neyin nereye bağlanacağını gösteren
+                        terminal tabanlı arayüz, pin şemaları ve entegre veritabanı.</p>
+                    <div class="btn-launch">SİSTEMİ BAŞLAT <i data-lucide="arrow-right" size="16"></i></div>
+                </div>
             </div>
 
-            <div class="card" onclick="window.parent.changePageFromIframe('tufang.html')">
-                <div class="card-header">
-                    <i data-lucide="languages" class="card-icon" size="32"></i>
-                    <h3>TUFANG</h3>
+            <div class="acc-panel" onclick="window.parent.changePageFromIframe('tufang.html')">
+                <div class="acc-bg"
+                    style="background-image: linear-gradient(#0a0a0c 1px, transparent 1px); background-size: 100% 10px;">
                 </div>
-                <p>Sözlük.</p>
+                <div class="acc-content">
+                    <div class="acc-header">
+                        <div class="acc-icon"><i data-lucide="languages" size="24"></i></div>
+                        <h3 class="acc-title">TUFANG</h3>
+                    </div>
+                    <p class="acc-text">Kapsamlı teknik sözlük. Askeri, mühendislik ve yazılım terimlerinin hızlıca
+                        aranıp bulunabileceği bağımsız platform.</p>
+                    <div class="btn-launch">SİSTEMİ BAŞLAT <i data-lucide="arrow-right" size="16"></i></div>
+                </div>
             </div>
 
         </div>
@@ -215,4 +351,5 @@
         lucide.createIcons();
     </script>
 </body>
+
 </html>
