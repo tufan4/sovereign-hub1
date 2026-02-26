@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SOVEREIGN - Anasayfa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Host+Grotesk:wght@300;400;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg-camo: #1b2118;
+            --panel: #11160c;
+            --border: #2f3824;
+            --accent: #d4af37; 
+            --text: #e0e8d8;
+            --dim: #a1aa95;
+        }
+
+        body {
+            background-color: var(--bg-camo);
+            background-image: 
+                linear-gradient(rgba(27, 33, 24, 0.9), rgba(27, 33, 24, 0.9)),
+                repeating-linear-gradient(45deg, #161b13 0px, #161b13 2px, transparent 2px, transparent 4px);
+            color: var(--text);
+            font-family: 'Host Grotesk', sans-serif;
+            margin: 0; padding: 40px;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1000px; margin: 0 auto; }
+
+        /* HERO SECTION */
+        .hero { 
+            text-align: center; 
+            margin-bottom: 60px; 
+            border-bottom: 2px solid var(--border); 
+            padding-bottom: 40px; 
+            position: relative;
+        }
+        .hero::after {
+            content: '';
+            position: absolute; bottom: -2px; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 2px; background: var(--accent);
+        }
+
+        .hero h1 { 
+            font-family: 'Black Ops One', cursive; 
+            font-size: 5rem; 
+            color: #fff; 
+            margin: 0; 
+            letter-spacing: 6px; 
+            text-shadow: 4px 4px 0px #0a0c09; 
+        }
+        .hero h2 { 
+            font-family: 'Black Ops One', cursive; 
+            font-size: 1.5rem; 
+            color: var(--accent); 
+            margin: 10px 0 25px 0; 
+            letter-spacing: 5px;
+            font-weight: 400;
+        }
+        .hero p { 
+            font-family: 'Host Grotesk', sans-serif;
+            font-size: 1.1rem; 
+            color: var(--dim); 
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+            border-left: 3px solid var(--accent);
+            padding-left: 15px;
+            text-align: left;
+            background: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 4px;
+        }
+
+        .section-title { 
+            font-family: 'Black Ops One', cursive; 
+            font-size: 2.2rem; 
+            color: #fff; 
+            margin-bottom: 40px; 
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .section-title::before {
+            content: ''; width: 12px; height: 12px; background: var(--accent); display: inline-block;
+        }
+
+        /* CARDS */
+        .cards { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); 
+            gap: 30px; 
+        }
+
+        .card { 
+            background: var(--panel); 
+            border: 1px solid var(--border); 
+            border-radius: 8px; 
+            padding: 30px; 
+            cursor: pointer;
+            position: relative; 
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '>>>';
+            position: absolute;
+            top: 20px; right: 20px;
+            font-family: 'Black Ops One', cursive;
+            color: var(--border);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+            background: rgba(17, 22, 12, 0.8);
+        }
+
+        .card:hover::before {
+            color: var(--accent);
+            right: 15px;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+        }
+
+        .card-icon {
+            color: var(--accent);
+        }
+
+        .card h3 { 
+            font-family: 'Black Ops One', cursive; 
+            color: #fff; 
+            font-size: 1.8rem; 
+            margin: 0; 
+            letter-spacing: 1px; 
+        }
+
+        .card p { 
+            color: var(--dim); 
+            line-height: 1.6; 
+            font-size: 1.05rem; 
+            margin: 0;
+            flex-grow: 1;
+        }
+
+        @media (max-width: 600px) {
+            .hero h1 { font-size: 3rem; }
+            .cards { grid-template-columns: 1fr; }
+            body { padding: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hero">
+            <h1>SOVEREIGN</h1>
+            <h2>ASKERİ EĞİTİM PLATFORMU //</h2>
+            <p>Rifat Emre Tufan tarafından oluşturulmuş, geliştirilmekte olan eğitim içeriğidir.</p>
+        </div>
+        
+        <h2 class="section-title">NELER VAR?</h2>
+        
+        <div class="cards">
+            
+            <div class="card" onclick="window.parent.changePageFromIframe('plc.html')">
+                <div class="card-header">
+                    <i data-lucide="zap" class="card-icon" size="32"></i>
+                    <h3>PLC SYSTEM</h3>
+                </div>
+                <p>PLC öğrenmekte olan insanların temel bilgi seviyesine sahip olması için gereken şeyler vardır.</p>
+            </div>
+
+            <div class="card" onclick="window.parent.changePageFromIframe('stm32.html')">
+                <div class="card-header">
+                    <i data-lucide="cpu" class="card-icon" size="32"></i>
+                    <h3>STM32 CORE</h3>
+                </div>
+                <p>Askeri alanda C programlama dilini kullanarak STM32 mikroişlemci modüllerini öğrenmek içindir.</p>
+            </div>
+
+            <div class="card" onclick="window.parent.changePageFromIframe('ohmletter2.html')">
+                <div class="card-header">
+                    <i data-lucide="book" class="card-icon" size="32"></i>
+                    <h3>OHMLETTER</h3>
+                </div>
+                <p>Elektrik alanında neyin nereye bağlanacağını gösteren kısımdır.</p>
+            </div>
+
+            <div class="card" onclick="window.parent.changePageFromIframe('tufang.html')">
+                <div class="card-header">
+                    <i data-lucide="languages" class="card-icon" size="32"></i>
+                    <h3>TUFANG</h3>
+                </div>
+                <p>Sözlük.</p>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
