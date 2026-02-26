@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SOVEREIGN HUB | RIFAT EMRE TUFAN</title>
+    <link href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;700&family=Outfit:wght@600;900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        :root {
+            --bg: #030303; --panel: #080808; --border: #151515; --accent: #00ff88;
+            --text: #e0e0e0; --dim: #555; --sidebar-w: 240px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        
+        body { font-family: 'Host Grotesk', sans-serif; background: var(--bg); color: var(--text); height: 100vh; display: flex; overflow: hidden; }
+
+        /* --- SIDEBAR --- */
+        aside {
+            width: var(--sidebar-w);
+            background: var(--panel);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 30px 15px 0 15px; /* Alt padding footer'a devredildi */
+        }
+
+        .logo { font-family: 'Outfit'; font-weight: 900; font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 40px; display: flex; align-items: center; gap: 10px; color: #fff; }
+        .nav-label { font-size: 0.55rem; color: var(--dim); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin: 20px 0 10px 10px; }
+
+        .menu-item {
+            display: flex; align-items: center; gap: 12px; padding: 12px 15px;
+            color: #777; text-decoration: none; border-radius: 8px; margin-bottom: 4px;
+            cursor: pointer; transition: all 0.2s ease; font-size: 0.85rem;
+        }
+        .menu-item:hover { background: #0c0c0c; color: #fff; }
+        .menu-item.active { background: rgba(0, 255, 136, 0.05); color: var(--accent); font-weight: 600; }
+
+        /* --- BOLD FOOTER / LİSANS --- */
+        .sidebar-footer {
+            margin-top: auto;
+            padding: 25px 15px;
+            background: #050505; /* Hafif daha açık zemin */
+            border-top: 1px solid #151515;
+            margin-left: -15px;
+            margin-right: -15px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .dev-info {
+            font-size: 0.75rem;
+            line-height: 1.4;
+            color: #999;
+        }
+
+        .dev-info b {
+            display: block;
+            color: #fff;
+            font-family: 'Outfit';
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+
+        .license-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.55rem;
+            color: var(--accent);
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(0, 255, 136, 0.1);
+        }
+
+        /* --- VIEWPORT --- */
+        main { flex-grow: 1; position: relative; background: #000; display: flex; flex-direction: column; }
+        #loader { position: absolute; top: 0; left: 0; width: 100%; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s ease; z-index: 1000; }
+
+        .iframe-wrapper { flex-grow: 1; position: relative; overflow: hidden; }
+        iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; opacity: 0; transition: all 0.4s ease; pointer-events: none; }
+        iframe.active { opacity: 1; pointer-events: auto; }
+
+        /* --- MOBILE --- */
+        .mobile-nav {
+            display: none;
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: #080808; border-top: 1px solid var(--border);
+            padding: 10px 0 calc(10px + env(safe-area-inset-bottom));
+            justify-content: space-around; z-index: 2000;
+        }
+
+        .mobile-item { display: flex; flex-direction: column; align-items: center; color: #555; font-size: 0.6rem; gap: 4px; text-decoration: none; font-weight: 700; text-transform: uppercase; }
+        .mobile-item.active { color: var(--accent); }
+
+        @media (max-width: 850px) {
+            aside { display: none; }
+            .mobile-nav { display: flex; }
+            main { height: calc(100vh - 75px); }
+            /* Mobil Footer (İstenirse Menüye de Eklenebilir) */
+        }
+    </style>
+</head>
+<body>
+
+    <div id="loader"></div>
+
+    <aside>
+        <div class="logo"><i data-lucide="shield-check"></i> SOVEREIGN</div>
+        
+        <span class="nav-label">MÜHENDİSLİK</span>
+        <div class="menu-item active" onclick="loadPage('STM32_Sovereign_Engineering_v7.5 (1)_injected.html', this)">
+            <i data-lucide="cpu" size="18"></i> STM32 Core
+        </div>
+        <div class="menu-item" onclick="loadPage('PLC_Teknik_Rehber.html', this)">
+            <i data-lucide="zap" size="18"></i> PLC System
+        </div>
+
+        <span class="nav-label">ARŞİV</span>
+        <div class="menu-item" onclick="loadPage('ohmletter2.html', this)">
+            <i data-lucide="book" size="18"></i> Ohmletter
+        </div>
+        <div class="menu-item" onclick="loadPage('tufang.html', this)">
+            <i data-lucide="languages" size="18"></i> Tufang
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="footer-content">
+                <div class="dev-info">
+                    <b>RIFAT EMRE TUFAN</b>
+                    Kontrol ve Otomasyon Öğrencisi
+                </div>
+                <div class="license-badge">© 2026 ALL RIGHTS RESERVED</div>
+            </div>
+        </div>
+    </aside>
+
+    <main>
+        <div class="iframe-wrapper">
+            <iframe id="content-frame" class="active"></iframe>
+        </div>
+    </main>
+
+    <div class="mobile-nav">
+        <a class="mobile-item active" onclick="loadPage('STM32_Sovereign_Engineering_v7.5 (1)_injected.html', this)">
+            <i data-lucide="cpu" size="20"></i>STM32
+        </a>
+        <a class="mobile-item" onclick="loadPage('PLC_Teknik_Rehber.html', this)">
+            <i data-lucide="zap" size="20"></i>PLC
+        </a>
+        <a class="mobile-item" onclick="loadPage('ohmletter2.html', this)">
+            <i data-lucide="book" size="20"></i>OHM
+        </a>
+        <a class="mobile-item" onclick="loadPage('tufang.html', this)">
+            <i data-lucide="languages" size="20"></i>DİL
+        </a>
+    </div>
+
+    <script>
+        lucide.createIcons();
+        const frame = document.getElementById('content-frame');
+        const loader = document.getElementById('loader');
+
+        function loadPage(url, el) {
+            document.querySelectorAll('.menu-item, .mobile-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll(`[onclick*="${url}"]`).forEach(match => match.classList.add('active'));
+
+            loader.style.transform = 'scaleX(0.5)';
+            frame.style.opacity = '0';
+            setTimeout(() => { frame.src = url; }, 50);
+
+            frame.onload = () => {
+                loader.style.transform = 'scaleX(1)';
+                setTimeout(() => {
+                    frame.style.opacity = '1';
+                    loader.style.transform = 'scaleX(0)';
+                }, 200);
+            };
+        }
+
+        window.onload = () => {
+            loadPage('STM32_Sovereign_Engineering_v7.5 (1)_injected.html', document.querySelector('.menu-item'));
+        };
+    </script>
+</body>
+</html>
