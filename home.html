@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOVEREIGN - Anasayfa</title>
     <link
-        href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;700&family=Outfit:wght@500;700;900&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Host+Grotesk:wght@300;400;700&family=Outfit:wght@500;700;900&display=swap"
         rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -52,24 +52,42 @@
         }
 
         .hero h1 {
-            font-family: var(--font-title);
-            font-size: 5rem;
-            font-weight: 900;
+            font-family: 'Black Ops One', cursive;
+            font-size: 6rem;
+            font-weight: 400;
             color: #fff;
             margin: 0;
-            letter-spacing: -2px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            text-shadow: 0 0 40px rgba(212, 175, 55, 0.2);
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3), 4px 4px 0px rgba(0, 0, 0, 0.5);
+            background: linear-gradient(180deg, #fff 0%, var(--accent) 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .hero h2 {
-            font-family: var(--font-title);
-            font-size: 1.2rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1rem;
             color: var(--accent);
-            margin: 0 0 20px 0;
-            letter-spacing: 6px;
-            font-weight: 700;
+            margin: -10px 0 30px 0;
+            letter-spacing: 8px;
+            font-weight: 400;
             text-transform: uppercase;
+            opacity: 0.8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .hero h2::before,
+        .hero h2::after {
+            content: '';
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+            opacity: 0.5;
         }
 
         .hero p {
@@ -148,6 +166,25 @@
             opacity: 0.95;
         }
 
+        /* Köşe Süslemeleri */
+        .acc-panel::after {
+            content: '';
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid var(--accent);
+            border-right: 2px solid var(--accent);
+            opacity: 0;
+            transition: all 0.3s;
+        }
+
+        .acc-panel:hover::after {
+            opacity: 1;
+            transform: translate(5px, -5px);
+        }
+
         .acc-bg {
             position: absolute;
             top: 0;
@@ -220,6 +257,39 @@
         .acc-panel:hover .acc-text {
             opacity: 1;
             transition-delay: 0.2s;
+        }
+
+        .acc-status {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: -5px;
+            opacity: 0.6;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.3;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.3;
+            }
         }
 
         .btn-launch {
@@ -312,7 +382,8 @@
         <div class="hero">
             <h1>SOVEREIGN</h1>
             <h2>Askeri Eğitim Platformu //</h2>
-            <p>Kontrol ve Otomasyon Öğrencisi Rifat Emre Tufan tarafından oluşturulmuş, geliştirilmekte olan eğitim içeriğidir.</p>
+            <p>Kontrol ve Otomasyon Öğrencisi Rifat Emre Tufan tarafından oluşturulmuş, geliştirilmekte olan eğitim
+                içeriğidir.</p>
         </div>
 
         <h2 class="section-title">NELER VAR?</h2>
@@ -326,7 +397,10 @@
                 <div class="acc-content">
                     <div class="acc-header">
                         <div class="acc-icon"><i data-lucide="zap" size="24"></i></div>
-                        <h3 class="acc-title">PLC</h3>
+                        <div>
+                            <div class="acc-status"><span class="status-dot"></span> SYSTEM: READY</div>
+                            <h3 class="acc-title">PLC</h3>
+                        </div>
                     </div>
                     <p class="acc-text">PLC öğrenmekte olan insanların temel bilgi seviyesine sahip olması için gereken
                         mimari kurallar, ladder diyagramları ve sistem rehberleri.</p>
@@ -341,7 +415,10 @@
                 <div class="acc-content">
                     <div class="acc-header">
                         <div class="acc-icon"><i data-lucide="cpu" size="24"></i></div>
-                        <h3 class="acc-title">STM32</h3>
+                        <div>
+                            <div class="acc-status"><span class="status-dot"></span> ENCRYPTED: YES</div>
+                            <h3 class="acc-title">STM32</h3>
+                        </div>
                     </div>
                     <p class="acc-text">Askeri alanda C programlama dilini kullanarak STM32 mikroişlemci modüllerini
                         öğrenmek ve donanım seviyesinde kodlamak içindir.</p>
@@ -356,7 +433,10 @@
                 <div class="acc-content">
                     <div class="acc-header">
                         <div class="acc-icon"><i data-lucide="zap-off" size="24"></i></div>
-                        <h3 class="acc-title">OhmLetter</h3>
+                        <div>
+                            <div class="acc-status"><span class="status-dot"></span> ARCHIVE: ACCESSIBLE</div>
+                            <h3 class="acc-title">OhmLetter</h3>
+                        </div>
                     </div>
                     <p class="acc-text">Elektrik alanında devasa bilgi kütüphanesi. Neyin nereye bağlanacağını gösteren
                         terminal tabanlı arayüz, pin şemaları ve entegre veritabanı.</p>
@@ -371,7 +451,10 @@
                 <div class="acc-content">
                     <div class="acc-header">
                         <div class="acc-icon"><i data-lucide="languages" size="24"></i></div>
-                        <h3 class="acc-title">tufang</h3>
+                        <div>
+                            <div class="acc-status"><span class="status-dot"></span> DATABASE: ACTIVE</div>
+                            <h3 class="acc-title">tufang</h3>
+                        </div>
                     </div>
                     <p class="acc-text">Kapsamlı teknik sözlük. Askeri, mühendislik ve yazılım terimlerinin hızlıca
                         aranıp bulunabileceği bağımsız platform.</p>
