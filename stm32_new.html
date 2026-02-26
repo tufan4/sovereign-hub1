@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="tr" data-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STM32 Teknik Rehberi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@300;400;700&family=Outfit:wght@500;700;900&family=JetBrains+Mono:wght@400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+
+<body>
+
+    <!-- ===== SIDEBAR ===== -->
+    <nav id="sidebar">
+        <div class="sidebar-logo">
+            <div class="sidebar-logo-icon">STM</div>
+            <div>
+                <div class="sidebar-logo-text">STM32</div>
+                <div class="sidebar-logo-sub">Teknik Referans Rehberi</div>
+            </div>
+        </div>
+
+        <div class="sidebar-search">
+            <span class="search-icon">🔍</span>
+            <input type="text" id="searchInput" placeholder="Konu veya kavram ara…" oninput="handleSearch(this.value)">
+        </div>
+
+        <div class="sidebar-nav">
+            <div class="nav-section-label">Başlangıç</div>
+            <a class="nav-item active" onclick="showSection('home')" href="#home">
+                <span class="nav-item-icon">🏠</span> Genel Bakış
+            </a>
+
+            <div class="nav-section-label">Bölümler</div>
+            <a class="nav-item" onclick="showSection('mod-1772096417766')" href="#mod-1772096417766"><span
+                    class="nav-item-icon">⚡</span>Cortex-A ve M Mimarileri</a>
+            <a class="nav-item" onclick="showSection('mod-1772096423856')" href="#mod-1772096423856"><span
+                    class="nav-item-icon">⚡</span>Cortex-R ve M Mimarileri</a>
+            <a class="nav-item" onclick="showSection('mod-1772096507722')" href="#mod-1772096507722"><span
+                    class="nav-item-icon">⚡</span>Cortex-M Mimarisi</a>
+            <a class="nav-item" onclick="showSection('mod-1772096520169')" href="#mod-1772096520169"><span
+                    class="nav-item-icon">⚡</span>F0 ve F1 Analizi</a>
+            <a class="nav-item" onclick="showSection('mod-1772096529729')" href="#mod-1772096529729"><span
+                    class="nav-item-icon">⚡</span>L0 ve L4 Analizi</a>
+            <a class="nav-item" onclick="showSection('mod-1772096553216')" href="#mod-1772096553216"><span
+                    class="nav-item-icon">⚡</span>F4, F7 ve H7 Analizi</a>
+            <a class="nav-item" onclick="showSection('mod-1772096562016')" href="#mod-1772096562016"><span
+                    class="nav-item-icon">⚡</span>STM32WB Analizi</a>
+            <a class="nav-item" onclick="showSection('mod-1772097380323')" href="#mod-1772097380323"><span
+                    class="nav-item-icon">⚡</span>Eclipse IDE Entegrasyonu</a>
+            <a class="nav-item" onclick="showSection('mod-1772097390449')" href="#mod-1772097390449"><span
+                    class="nav-item-icon">⚡</span>GNU MCU Eclipse Eklentileri</a>
+            <a class="nav-item" onclick="showSection('mod-1772097397218')" href="#mod-1772097397218"><span
+                    class="nav-item-icon">⚡</span>GCC ARM Derleyici</a>
+            <a class="nav-item" onclick="showSection('mod-1772097540864')" href="#mod-1772097540864"><span
+                    class="nav-item-icon">⚡</span>OpenOCD ve Debugging</a>
+            <a class="nav-item" onclick="showSection('mod-1772097562026')" href="#mod-1772097562026"><span
+                    class="nav-item-icon">⚡</span>ST-LINK ve Debugging</a>
+            <a class="nav-item" onclick="showSection('mod-1772097571728')" href="#mod-1772097571728"><span
+                    class="nav-item-icon">⚡</span>SEGGER J-Link</a>
+            <a class="nav-item" onclick="showSection('mod-1772097579033')" href="#mod-1772097579033"><span
+                    class="nav-item-icon">⚡</span>STM32CubeMX</a>
+            <a class="nav-item" onclick="showSection('mod-1772097766482')" href="#mod-1772097766482"><span
+                    class="nav-item-icon">⚡</span>STM32Cube HAL</a>
+            <a class="nav-item" onclick="showSection('mod-1772097774369')" href="#mod-1772097774369"><span
+                    class="nav-item-icon">⚡</span>GPIO Yönetimi</a>
+            <a class="nav-item" onclick="showSection('mod-1772097784115')" href="#mod-1772097784115"><span
+                    class="nav-item-icon">⚡</span>NVIC ve Kesme Yönetimi</a>
+            <a class="nav-item" onclick="showSection('mod-1772097794746')" href="#mod-1772097794746"><span
+                    class="nav-item-icon">⚡</span>DMA Analizi</a>
+            <a class="nav-item" onclick="showSection('mod-1772097980946')" href="#mod-1772097980946"><span
+                    class="nav-item-icon">⚡</span>Zamanlayıcılar ve PWM</a>
+            <a class="nav-item" onclick="showSection('mod-1772097990690')" href="#mod-1772097990690"><span
+                    class="nav-item-icon">⚡</span>Seri İletişim</a>
+            <a class="nav-item" onclick="showSection('mod-1772097999604')" href="#mod-1772097999604"><span
+                    class="nav-item-icon">⚡</span>Analog Birimler (ADC, DAC)</a>
+            <a class="nav-item" onclick="showSection('mod-1772098011402')" href="#mod-1772098011402"><span
+                    class="nav-item-icon">⚡</span>RTC Analizi</a>
+            <a class="nav-item" onclick="showSection('mod-1772098212050')" href="#mod-1772098212050"><span
+                    class="nav-item-icon">⚡</span>Güç Yönetimi</a>
+            <a class="nav-item" onclick="showSection('mod-1772098222809')" href="#mod-1772098222809"><span
+                    class="nav-item-icon">⚡</span>FreeRTOS Tickless Modu</a>
+            <a class="nav-item" onclick="showSection('mod-1772098229354')" href="#mod-1772098229354"><span
+                    class="nav-item-icon">⚡</span>ARM Semihosting</a>
+            <a class="nav-item" onclick="showSection('mod-1772098238465')" href="#mod-1772098238465"><span
+                    class="nav-item-icon">⚡</span>ITM ve SWO İzleme</a>
+            <a class="nav-item" onclick="showSection('mod-1772098542218')" href="#mod-1772098542218"><span
+                    class="nav-item-icon">⚡</span>İzleme Noktaları (Watchpoints)</a>
+            <a class="nav-item" onclick="showSection('mod-1772098551075')" href="#mod-1772098551075"><span
+                    class="nav-item-icon">⚡</span>FreeRTOS Görev Yönetimi</a>
+            <a class="nav-item" onclick="showSection('mod-1772098559793')" href="#mod-1772098559793"><span
+                    class="nav-item-icon">⚡</span>FreeRTOS Kuyruk ve Semafor</a>
+            <a class="nav-item" onclick="showSection('mod-1772098569282')" href="#mod-1772098569282"><span
+                    class="nav-item-icon">⚡</span>CMSIS-RTOS API</a>
+            <a class="nav-item" onclick="showSection('mod-1772098861954')" href="#mod-1772098861954"><span
+                    class="nav-item-icon">⚡</span>FATFS Dosya Sistemi</a>
+            <a class="nav-item" onclick="showSection('mod-1772098867810')" href="#mod-1772098867810"><span
+                    class="nav-item-icon">⚡</span>LwIP TCP/IP Yığını</a>
+        </div>
+
+        <div class="sidebar-footer">
+            <button onclick="window.parent.changePage('home.html')"
+                style="background:none; border:1px solid var(--border-accent); color:var(--accent-blue); padding:6px 12px; border-radius:5px; cursor:pointer; font-size:12px; font-weight:700; width: 100%; display:inline-flex; align-items:center; justify-content:center; gap:5px; transition:0.3s;"
+                onmouseover="this.style.background='var(--accent-blue)'; this.style.color='#000';"
+                onmouseout="this.style.background='none'; this.style.color='var(--accent-blue)';">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="m12 19-7-7 7-7" />
+                    <path d="M19 12H5" />
+                </svg>
+                ANASAYFAYA DÖN
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HEADER ===== -->
+    <header id="header">
+        <div class="header-title">
+            <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+            <span>STM32</span>
+            <span class="header-breadcrumb" id="breadcrumb">/ Genel Bakış</span>
+        </div>
+        <div class="header-actions">
+            <button onclick="window.print()"
+                style="background:none;border:1px solid var(--border);color:var(--text-secondary);padding:6px 12px;border-radius:5px;cursor:pointer;font-size:12px;">🖨
+                Yazdır</button>
+        </div>
+    </header>
+
+    <main id="main">
+        <!-- All sections will be injected here by the script -->
+    </main>
+
+    <script src="assets/script.js"></script>
+    <script>
+        const sectionsData =
+            {
+                "mod-1772096417766": {
+                    "title": "ARM CORTEX-A VE CORTEX-M MİMARİLERİNİN TAKTİKSEL ÇAPRAZ ANALİZİ",
+                    "tag": "Bölüm 1"
+                },
+                "mod-1772096423856": {
+                    "title": "ARM CORTEX-R (GERÇEK ZAMANLI) VE CORTEX-M (GÖMÜLÜ) MİMARİLERİNİN TAKTİKSEL ANALİZİ",
+                    "tag": "Bölüm 2"
+                },
+                "mod-1772096507722": {
+                    "title": "ARM CORTEX-M (EMBEDDED) MİMARİSİ VE KAPSAMLI SİSTEM ANALİZİ",
+                    "tag": "Bölüm 3"
+                },
+            }; // This would be a very large object in a real scenario
+
+        const mainContainer = document.getElementById('main');
+
+        for (const id in sectionsData) {
+            const section = document.createElement('section');
+            section.id = id;
+            section.className = 'section';
+
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `
+                <div class="section-header-tag">${sectionsData[id].tag}</div>
+                <h2>${sectionsData[id].title}</h2>
+            `;
+            // Add description paragraph here
+            
+            section.appendChild(header);
+            
+            // ... create and append cards for tables, code, notes etc. ...
+
+            mainContainer.appendChild(section);
+        }
+
+    </script>
+</body>
+
+</html>
