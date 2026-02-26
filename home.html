@@ -451,157 +451,209 @@
         }
 
         /* ══════════════════════════════════════
-           MOBILE LAYOUT — Diagonal-cut stacked cards
+           PULL-TO-REFRESH INDICATOR
+           ══════════════════════════════════════ */
+        #ptr-indicator {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            height: 54px;
+            background: linear-gradient(to bottom, rgba(10,10,12,0.98), transparent);
+            color: var(--accent);
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            pointer-events: none;
+            transform: translateY(-54px);
+            transition: transform 0.2s;
+        }
+
+        #ptr-indicator.pulling {
+            display: flex;
+        }
+
+        #ptr-indicator.ready {
+            transform: translateY(0);
+        }
+
+        #ptr-spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(212,175,55,0.3);
+            border-top-color: var(--accent);
+            border-radius: 50%;
+        }
+
+        #ptr-spinner.spin {
+            animation: spinIt 0.6s linear infinite;
+        }
+
+        @keyframes spinIt {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ══════════════════════════════════════
+           MOBILE LAYOUT — Horizontal scroll cards
            ══════════════════════════════════════ */
         @media (max-width: 820px) {
             body { padding: 0; }
 
             .container {
-                padding: 20px 14px 32px;
+                padding: 20px 0 32px;
             }
 
+            .hero, .section-title {
+                padding-left: 16px;
+                padding-right: 16px;
+            }
+
+            /* Horizontal scroll strip */
             .accordion-wrapper {
-                flex-direction: column;
+                flex-direction: row;
+                flex-wrap: nowrap;
                 height: auto;
                 min-height: unset;
-                gap: 0;
-                border-radius: 18px;
-                overflow: hidden;
+                gap: 12px;
+                /* scroll */
+                overflow-x: auto;
+                overflow-y: visible;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                padding: 8px 16px 20px;
+                /* hide scrollbar */
+                scrollbar-width: none;
+                -ms-overflow-style: none;
             }
 
-            /* Each card as a diagonal-cut panel */
+            .accordion-wrapper::-webkit-scrollbar {
+                display: none;
+            }
+
+            /* Each card is a fixed-width snap target */
             .acc-panel {
                 flex: none !important;
-                height: 90px;
-                border-radius: 0;
-                border: none;
-                border-bottom: 1px solid var(--border);
-                padding: 0 20px;
-                justify-content: center;
+                width: 78vw;
+                max-width: 300px;
+                min-height: 220px;
+                height: auto !important;
+                border-radius: 18px !important;
+                border: 1px solid var(--border) !important;
+                padding: 22px 20px;
+                justify-content: flex-end;
+                scroll-snap-align: start;
+                /* Remove desktop hover expand */
                 transition:
-                    height 0.45s cubic-bezier(0.25,0.8,0.25,1),
                     border-color 0.3s,
-                    box-shadow 0.3s;
-                will-change: height;
-                /* Clip the diagonal cut */
-                clip-path: polygon(0 0, 100% 0, 100% calc(100% - 0px), 0 100%);
+                    box-shadow 0.3s,
+                    transform 0.3s;
+                will-change: transform;
+                /* diagonal cut via clip-path */
+                clip-path: polygon(0 0, 100% 0, 100% 88%, 92% 100%, 0 100%);
             }
 
-            .acc-panel:first-child  { border-radius: 18px 18px 0 0; }
-            .acc-panel:last-child   { border-radius: 0 0 18px 18px; border-bottom: none; }
-
-            /* The diagonal CSS clip creates overlapping effect between cards */
-            .acc-panel:not(:first-child) {
-                margin-top: -1px;
-            }
-
-            /* Active/open state on mobile uses JS toggle */
+            /* Tapped/active card pops slightly */
             .acc-panel.open {
-                height: 280px;
-                border-color: rgba(212,175,55,0.4);
-                box-shadow: 0 4px 30px rgba(212,175,55,0.1);
-                z-index: 10;
+                border-color: rgba(212,175,55,0.55) !important;
+                box-shadow: 0 8px 40px rgba(212,175,55,0.15);
+                transform: translateY(-4px);
             }
 
+            /* Kill desktop flex-expand on mobile hover */
             .acc-panel:hover {
-                flex: unset;
+                flex: none !important;
                 box-shadow: none;
+                border-color: var(--border) !important;
             }
 
-            /* On mobile keep content NOT pushed down */
+            .acc-panel.open:hover {
+                border-color: rgba(212,175,55,0.55) !important;
+            }
+
+            /* Content always fully visible */
             .acc-content {
-                gap: 8px;
+                transform: none !important;
+                transition: none !important;
+                gap: 10px;
             }
 
-            /* On mobile, text/btn hidden → expand on open */
+            /* Text always visible */
             .acc-panel .acc-text {
-                opacity: 0;
-                max-height: 0;
-                overflow: hidden;
-                margin: 0;
-                pointer-events: none;
-                transition: opacity 0.3s, max-height 0.4s cubic-bezier(0.25,0.8,0.25,1);
+                opacity: 0.75 !important;
+                max-height: none !important;
+                overflow: visible !important;
+                pointer-events: auto !important;
+                font-size: 0.85rem;
+                transition: none !important;
             }
 
+            /* Button always visible */
             .acc-panel .btn-launch {
-                opacity: 0;
-                transform: translateY(6px);
-                pointer-events: none;
-                transition: opacity 0.3s, transform 0.3s;
-            }
-
-            .acc-panel.open .acc-text {
-                opacity: 1;
-                max-height: 120px;
-                pointer-events: auto;
-                transition-delay: 0.1s;
-            }
-
-            .acc-panel.open .btn-launch {
-                opacity: 1;
-                transform: translateY(0);
-                pointer-events: auto;
-                transition-delay: 0.18s;
-            }
-
-            /* Header stays visible always on mobile */
-            .acc-header {
-                align-items: center;
+                opacity: 1 !important;
+                transform: none !important;
+                pointer-events: auto !important;
+                transition: background 0.2s !important;
+                font-size: 0.8rem;
+                padding: 8px 14px;
             }
 
             .acc-title {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
             }
 
-            /* Show corner bracket when open on mobile */
+            /* BG visible on mobile */
+            .acc-bg {
+                opacity: 0.2;
+                filter: grayscale(50%);
+            }
+
+            .acc-panel.open .acc-bg {
+                opacity: 0.3;
+                filter: grayscale(0%);
+            }
+
+            /* Corner bracket on open */
             .acc-panel.open::after {
                 opacity: 1;
                 transform: translate(4px, -4px);
             }
 
-            /* Diagonal slash visible on open */
-            .acc-panel.open .acc-slash::before {
-                bottom: -10%;
-            }
-            .acc-panel.open .acc-slash::after {
-                bottom: -15%;
-            }
+            /* Diagonal slash on open */
+            .acc-panel.open .acc-slash::before { bottom: -10%; }
+            .acc-panel.open .acc-slash::after  { bottom: -15%; }
 
-            /* BG on mobile */
-            .acc-panel.open .acc-bg {
-                opacity: 0.25;
-                filter: grayscale(30%);
-            }
-
-            /* Chevron indicator */
-            .mob-chevron {
+            /* Scroll dots indicator */
+            .mob-scroll-dots {
                 display: flex;
-                margin-left: auto;
-                flex-shrink: 0;
-                color: var(--accent);
-                opacity: 0.6;
-                transition: transform 0.35s, opacity 0.2s;
+                justify-content: center;
+                gap: 6px;
+                margin-top: 4px;
             }
 
-            .mob-chevron svg {
-                width: 18px;
-                height: 18px;
-                stroke: var(--accent);
-                fill: none;
-                stroke-width: 2;
-                stroke-linecap: round;
-                stroke-linejoin: round;
+            .mob-scroll-dots span {
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                background: var(--border);
+                transition: background 0.3s, transform 0.3s;
             }
 
-            .acc-panel.open .mob-chevron {
-                transform: rotate(180deg);
-                opacity: 1;
+            .mob-scroll-dots span.active {
+                background: var(--accent);
+                transform: scale(1.3);
             }
         }
 
-        @media (min-width: 821px) {
-            .mob-chevron { display: none; }
-        }
+        /* Hide scroll dots on desktop */
+        .mob-scroll-dots { display: none; }
+
+        /* Hide chevron (not needed with horizontal scroll) */
+        .mob-chevron { display: none !important; }
 
         /* ── FOOTER ── */
         .footer {
@@ -617,6 +669,12 @@
 </head>
 
 <body>
+    <!-- Pull-to-refresh indicator -->
+    <div id="ptr-indicator">
+        <div id="ptr-spinner"></div>
+        <span id="ptr-label">ÇEKMEYE DEVAM ET</span>
+    </div>
+
     <div class="container">
 
         <!-- HERO -->
@@ -723,49 +781,37 @@
 
         </div>
 
+        <!-- Mobile scroll position dots -->
+        <div class="mob-scroll-dots" id="scrollDots">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+        </div>
+
         <div class="footer">© Rifat Emre Tufan — Sovereign Platform</div>
     </div>
 
     <script>
-        // ── Mobile: tap-to-toggle accordion ──────────────────────────────
-        function isMobile() {
-            return window.innerWidth <= 820;
-        }
+        function isMobile() { return window.innerWidth <= 820; }
 
+        // ── Panel click handler ──────────────────────────────────────────
         function handlePanelClick(panel, url) {
             if (!isMobile()) {
-                // Desktop: navigate (iframe-aware)
-                if (window.parent && window.parent !== window) {
-                    if (typeof window.parent.changePageFromIframe === 'function') {
-                        window.parent.changePageFromIframe(url);
-                    } else {
-                        window.location.href = url;
-                    }
-                } else {
-                    window.location.href = url;
-                }
+                navigate(url);
                 return;
             }
-
-            // Mobile: first tap opens, second tap navigates
+            // Mobile: toggle highlight — "SİSTEMİ BAŞLAT" button handles actual navigation
             const allPanels = document.querySelectorAll('.acc-panel');
-            const isOpen = panel.classList.contains('open');
+            allPanels.forEach(p => { if (p !== panel) p.classList.remove('open'); });
+            panel.classList.toggle('open');
+        }
 
-            allPanels.forEach(p => p.classList.remove('open'));
-
-            if (!isOpen) {
-                panel.classList.add('open');
+        function navigate(url) {
+            if (window.parent && window.parent !== window &&
+                typeof window.parent.changePageFromIframe === 'function') {
+                window.parent.changePageFromIframe(url);
             } else {
-                // Already open → navigate
-                if (window.parent && window.parent !== window) {
-                    if (typeof window.parent.changePageFromIframe === 'function') {
-                        window.parent.changePageFromIframe(url);
-                    } else {
-                        window.location.href = url;
-                    }
-                } else {
-                    window.location.href = url;
-                }
+                window.location.href = url;
             }
         }
 
@@ -775,6 +821,75 @@
                 document.querySelectorAll('.acc-panel').forEach(p => p.classList.remove('open'));
             }
         });
+
+        // ── Scroll dots ──────────────────────────────────────────────────
+        const wrapper = document.querySelector('.accordion-wrapper');
+        const dots    = document.querySelectorAll('#scrollDots span');
+
+        if (wrapper && dots.length) {
+            wrapper.addEventListener('scroll', () => {
+                const panels = wrapper.querySelectorAll('.acc-panel');
+                const scrollLeft = wrapper.scrollLeft;
+                const wrapperW  = wrapper.clientWidth;
+                let closest = 0, minDist = Infinity;
+                panels.forEach((p, i) => {
+                    const dist = Math.abs(p.offsetLeft - scrollLeft - 16);
+                    if (dist < minDist) { minDist = dist; closest = i; }
+                });
+                dots.forEach((d, i) => d.classList.toggle('active', i === closest));
+            }, { passive: true });
+        }
+
+        // ── Pull-to-refresh ──────────────────────────────────────────────
+        const ptrEl    = document.getElementById('ptr-indicator');
+        const ptrSpinner = document.getElementById('ptr-spinner');
+        const ptrLabel   = document.getElementById('ptr-label');
+
+        let touchStartY = 0;
+        let pulling     = false;
+        const THRESHOLD = 80; // px to pull before triggering
+
+        document.addEventListener('touchstart', e => {
+            if (!isMobile()) return;
+            if (window.scrollY === 0) {
+                touchStartY = e.touches[0].clientY;
+                pulling = true;
+            }
+        }, { passive: true });
+
+        document.addEventListener('touchmove', e => {
+            if (!pulling || !isMobile()) return;
+            const delta = e.touches[0].clientY - touchStartY;
+            if (delta <= 0) { pulling = false; return; }
+
+            const progress = Math.min(delta / THRESHOLD, 1);
+            ptrEl.classList.add('pulling');
+            ptrEl.style.transform = `translateY(${(progress - 1) * 54}px)`;
+
+            if (progress >= 1) {
+                ptrLabel.textContent = 'YENİLE';
+                ptrSpinner.classList.add('spin');
+            } else {
+                ptrLabel.textContent = 'ÇEKMEYE DEVAM ET';
+                ptrSpinner.classList.remove('spin');
+            }
+        }, { passive: true });
+
+        document.addEventListener('touchend', e => {
+            if (!pulling || !isMobile()) return;
+            pulling = false;
+            const delta = e.changedTouches[0].clientY - touchStartY;
+
+            if (delta >= THRESHOLD) {
+                ptrEl.style.transform = 'translateY(0)';
+                ptrLabel.textContent  = 'YENİLENİYOR...';
+                setTimeout(() => window.location.reload(), 600);
+            } else {
+                ptrEl.style.transform = '';
+                setTimeout(() => ptrEl.classList.remove('pulling'), 300);
+                ptrSpinner.classList.remove('spin');
+            }
+        }, { passive: true });
     </script>
 </body>
 </html>
