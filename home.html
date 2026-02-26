@@ -270,6 +270,40 @@
                 font-size: 3rem;
             }
         }
+
+        /* --- STAGGERED REVEAL ANIMATION --- */
+        @keyframes revealCard {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .acc-panel {
+            opacity: 0;
+            animation: revealCard 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        .acc-panel:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .acc-panel:nth-child(2) {
+            animation-delay: 0.25s;
+        }
+
+        .acc-panel:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .acc-panel:nth-child(4) {
+            animation-delay: 0.55s;
+        }
     </style>
 </head>
 
@@ -278,7 +312,7 @@
         <div class="hero">
             <h1>SOVEREIGN</h1>
             <h2>Askeri Eğitim Platformu //</h2>
-            <p>Rifat Emre Tufan tarafından oluşturulmuş, geliştirilmekte olan eğitim içeriğidir.</p>
+            <p>Kontrol ve Otomasyon Öğrencisi Rifat Emre Tufan tarafından oluşturulmuş, geliştirilmekte olan eğitim içeriğidir.</p>
         </div>
 
         <h2 class="section-title">NELER VAR?</h2>
@@ -322,7 +356,7 @@
                 <div class="acc-content">
                     <div class="acc-header">
                         <div class="acc-icon"><i data-lucide="zap-off" size="24"></i></div>
-                        <h3 class="acc-title">OHMLETTER</h3>
+                        <h3 class="acc-title">OhmLetter</h3>
                     </div>
                     <p class="acc-text">Elektrik alanında devasa bilgi kütüphanesi. Neyin nereye bağlanacağını gösteren
                         terminal tabanlı arayüz, pin şemaları ve entegre veritabanı.</p>
@@ -337,7 +371,7 @@
                 <div class="acc-content">
                     <div class="acc-header">
                         <div class="acc-icon"><i data-lucide="languages" size="24"></i></div>
-                        <h3 class="acc-title">TUFANG</h3>
+                        <h3 class="acc-title">tufang</h3>
                     </div>
                     <p class="acc-text">Kapsamlı teknik sözlük. Askeri, mühendislik ve yazılım terimlerinin hızlıca
                         aranıp bulunabileceği bağımsız platform.</p>
